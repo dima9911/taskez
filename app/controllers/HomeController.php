@@ -20,35 +20,40 @@ class HomeController extends BaseController {
 		return View::make('index');
 	}
 
-		public function getMenu()
+		public function getMenu()//...досюда вам все понятно. 
 	{
 		return View::make('menu');
 	}
 
 		public function getPizza()
-	{
+	{	
 
-		return View::make('pizza'); //...досюда вам все понятно. 
+		$elements=Element::all();
+
+		return View::make('pizza')->with(compact('elements')); 
 	}
 
 	public function postCheck() //функция вызываемая ajax'ом. метод POST - не позволит пользователю получить к нему доступ напрямую (localhost/check)
-	{
+	{	
+		
 
 	 	$arr = Input::get("fields"); // получаем массив ID элементов лежащих в value выбранных radio/checkbox.
-
-		for ($i=0; $i<count($arr); $i++) 
+$count=count($arr);
+		for ($i=0; $i<$count; $i++) 
 	 	{
 	 		$elem[$i]=Element::find($arr[$i]); //по ID получаем массив Элементов пиццы. 
 	 	}
 
 	 	$res=0;
 
-	 	for ($j=0; $j < count($elem) ; $j++) 
+	 	$count2=count($elem);
+
+	 	for ($j=0; $j < $count2 ; $j++) 
 	 	{ 
 
 	 		if ($elem[$j]->type=="dough") //первый этап отличается от других: необходимо умножение относительной цены толщины теста на радиус. 
 	 		{
-	 			$elem[count($elem)]=$elem[$j]->price*$elem[$j+1]->price; //в последний элемент массива ставим суммарную цену
+	 			$elem[$count2]=$elem[$j]->price*$elem[$j+1]->price; //в последний элемент массива ставим суммарную цену
 
 	 			return $elem; //отдаем на вьюху массив Элементов и суммарную цену указанную в последнем элементе массива (можно и в отдельной переменной но так изящнее на мой взгляд)
 
@@ -62,7 +67,7 @@ class HomeController extends BaseController {
 
 	 	}
 
-	 	$elem[count($elem)]=$res;
+	 	$elem[$count2]=$res;
 	 	return $elem; //и отдаем массив Элементов с сумарной ценной на последнем элементе массива
 
 

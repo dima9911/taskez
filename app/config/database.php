@@ -54,10 +54,10 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'taskez.mysql.eu2.frbit.com',
-			'database'  => 'taskez',
-			'username'  => 'taskez',
-			'password'  => 'L5qgq=JYOHrCt=FvBgB4oNMq',
+			'host'      => 'localhost',
+			'database'  => 'pizza',
+			'username'  => 'root',
+			'password'  => '',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',
 			'prefix'    => '',

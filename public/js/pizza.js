@@ -2,7 +2,7 @@ $(document).ready(function () {
       //увы, одной функцией ограничится не получится. т.к. все radio и checkbox находятся в HTML СРАЗУ, и переход на след. этап- это всего лишь скрытие
     //одного блока и показ другого блока. Так что вот 3 разные функции. Не очень изящно, но вполне работоспособно.
     
-    $('#next').click(function() { //клик на кнопку "продолжить" на этапе выбора теста и радиуса для пиццы
+    $('#next0').click(function() { //клик на кнопку "продолжить" на этапе выбора теста и радиуса для пиццы
       var arr=[0, 0];
 
         
@@ -10,6 +10,8 @@ $(document).ready(function () {
      
              arr[0] = $("input[name=optradio]:checked").val(); //получаем ID элементов...
              arr[1] = $("input[name=optradio1]:checked").val(); //лежащих в VALUE отмеченных radio button. 
+
+
             
         if (arr[0]==null || arr[1]==null)
         {
@@ -36,7 +38,7 @@ $(document).ready(function () {
                     pr=pr+data[2]; //добавляем суммарную цену в скрытый (ПОКА ЧТО) блок. Его мы показжем на последнем этапе.
 
                 $('#price').html(pr);
-                $('#nam').append(data[0].name, "<br>", data[1].name); // тоже в скрытый блок добавляем NAME элементов. 
+                $('#nam').append(data[0].name, "<br>", data[1].name, "<br>"); // тоже в скрытый блок добавляем NAME элементов. 
 
             },
             error: function(data) {
@@ -141,6 +143,14 @@ $(document).ready(function () {
         // return false;
    
     });
+
+ $('#next3').click(function() {
+    var arr=$("input[name='optradio']:checked").map(function() {return this.value;}).get();
+    var arr1=$("input[name='optradio1']:checked").map(function() {return this.value;}).get();
+    arr=$.merge(arr, arr1);
+    console.log(arr);
+    $('#nam').append(arr);
+  });
 
 });
 
